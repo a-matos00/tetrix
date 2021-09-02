@@ -50,6 +50,7 @@
 
 #include "tetrixboard.h"
 #include "tetrixwindow.h"
+#include "tetrixpiece.h"
 
 #include <QCoreApplication>
 #include <QGridLayout>
@@ -76,16 +77,36 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     linesLcd->setSegmentStyle(QLCDNumber::Filled);
 
 //! [2]
-    startButton = new QPushButton(tr("&Start"));
+    startButton = new QPushButton(tr("START"));
     startButton->setFocusPolicy(Qt::NoFocus);
-    quitButton = new QPushButton(tr("&Quit"));
+    quitButton = new QPushButton(tr("EXIT"));
     quitButton->setFocusPolicy(Qt::NoFocus);
-    pauseButton = new QPushButton(tr("&Pause"));
+    pauseButton = new QPushButton(tr("Pause"));
+
+    //NEW
+    leftButton = new QPushButton(tr("LEFT"));
+    leftButton->setFocusPolicy(Qt::NoFocus);
+    rightButton = new QPushButton(tr("RIGHT"));
+    rightButton->setFocusPolicy(Qt::NoFocus);
+    dropButton = new QPushButton(tr("DROP"));
+    dropButton->setFocusPolicy(Qt::NoFocus);
+
+    rightButton->setStyleSheet("QPushButton{font-size: 50px;font-family: Arial;}");
+    leftButton->setStyleSheet("QPushButton{font-size: 50px;font-family: Arial;}");
+    startButton->setStyleSheet("QPushButton{font-size: 30px;font-family: Arial;}");
+    quitButton->setStyleSheet("QPushButton{font-size: 30px;font-family: Arial;}");
+    pauseButton->setStyleSheet("QPushButton{font-size: 30px;font-family: Arial;}");
+    dropButton->setStyleSheet("QPushButton{font-size: 30px;font-family: Arial;}");
+    //rotateButton = new QPushButton(tr("&Rotate"));
+    //rotateButton->setFocusPolicy(Qt::NoFocus);
 //! [2] //! [3]
     pauseButton->setFocusPolicy(Qt::NoFocus);
 //! [3] //! [4]
 
     connect(startButton, &QPushButton::clicked, board, &TetrixBoard::start);
+    connect(leftButton, &QPushButton::clicked, board, &TetrixBoard::leftPress);
+    connect(rightButton, &QPushButton::clicked, board, &TetrixBoard::rightPress);
+    connect(dropButton, &QPushButton::clicked, board, &TetrixBoard::dropDown);
 //! [4] //! [5]
     connect(quitButton , &QPushButton::clicked, qApp, &QCoreApplication::quit);
     connect(pauseButton, &QPushButton::clicked, board, &TetrixBoard::pause);
@@ -105,25 +126,30 @@ TetrixWindow::TetrixWindow(QWidget *parent)
             linesLcd, QOverload<int>::of(&QLCDNumber::display));
 #endif
 //! [5]
-
 //! [6]
     QGridLayout *layout = new QGridLayout;
-    layout->addWidget(createLabel(tr("NEXT")), 0, 0);
-    layout->addWidget(nextPieceLabel, 1, 0);
-    layout->addWidget(createLabel(tr("LEVEL")), 2, 0);
-    layout->addWidget(levelLcd, 3, 0);
+    layout->addWidget(createLabel(tr("NEXT")), 1, 0);
+    layout->addWidget(nextPieceLabel, 2, 0,2,1);
+    //layout->addWidget(createLabel(tr("LEVEL")), 2, 0);
+    //layout->addWidget(levelLcd, 3, 0);
     layout->addWidget(startButton, 4, 0);
     layout->addWidget(board, 0, 1, 6, 1);
-    layout->addWidget(createLabel(tr("SCORE")), 0, 2);
-    layout->addWidget(scoreLcd, 1, 2);
-    layout->addWidget(createLabel(tr("LINES REMOVED")), 2, 2);
-    layout->addWidget(linesLcd, 3, 2);
+    layout->addWidget(createLabel(tr("SCORE")), 3, 2);
+    layout->addWidget(scoreLcd, 2, 2,2,1);
+    //layout->addWidget(createLabel(tr("LINES REMOVED")), 2, 2);
+    //layout->addWidget(linesLcd, 3, 2);
     layout->addWidget(quitButton, 4, 2);
     layout->addWidget(pauseButton, 5, 2);
+    layout->addWidget(leftButton, 0, 0);
+    layout->addWidget(rightButton, 0, 2);
+    layout->addWidget(dropButton, 1, 2);
+    //layout->addWidget(rotateButton, 1, 2);
     setLayout(layout);
 
     setWindowTitle(tr("Tetrix"));
     resize(550, 370);
+    //background color
+    this->setStyleSheet("TetrixWindow{background-color:#eaeaea}");
 }
 //! [6]
 

@@ -72,8 +72,10 @@ public:
     int maxX() const;
     int minY() const;
     int maxY() const;
-    TetrixPiece rotatedLeft() const;
-    TetrixPiece rotatedRight() const;
+
+public slots:
+    TetrixPiece rotatedLeft();
+    TetrixPiece rotatedRight();
 
 private:
     void setX(int index, int x) { coords[index][0] = x; }

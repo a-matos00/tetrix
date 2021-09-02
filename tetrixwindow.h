@@ -52,6 +52,7 @@
 #define TETRIXWINDOW_H
 
 #include <QWidget>
+#include "tetrixpiece.h"
 
 QT_BEGIN_NAMESPACE
 class QLCDNumber;
@@ -79,6 +80,12 @@ private:
     QPushButton *startButton;
     QPushButton *quitButton;
     QPushButton *pauseButton;
+
+    //NEW
+    QPushButton *leftButton;
+    QPushButton *rightButton;
+    QPushButton *dropButton;
+
 };
 //! [0]
 

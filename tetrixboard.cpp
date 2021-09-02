@@ -49,6 +49,7 @@
 ****************************************************************************/
 
 #include "tetrixboard.h"
+#include "tetrixwindow.h"
 
 #include <QKeyEvent>
 #include <QLabel>

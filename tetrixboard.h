@@ -74,9 +74,13 @@ public:
     GPIO_pin* R_pin;
     GPIO_pin* ROT_pin;
 
+    TetrixPiece curPiece;
+
     void setNextPieceLabel(QLabel *label);
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
+
+    void dropDown();
 
 public slots:
     void start();
@@ -108,7 +112,7 @@ private:
     int squareWidth() { return contentsRect().width() / BoardWidth; }
     int squareHeight() { return contentsRect().height() / BoardHeight; }
     void clearBoard();
-    void dropDown();
+
     void oneLineDown();
     void pieceDropped(int dropHeight);
     void removeFullLines();
@@ -121,7 +125,6 @@ private:
     bool isStarted;
     bool isPaused;
     bool isWaitingAfterLine;
-    TetrixPiece curPiece;
     TetrixPiece nextPiece;
     int curX;
     int curY;
