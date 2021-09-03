@@ -54,6 +54,7 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QPainter>
+#include<QtDebug>
 
 //! [0]
 TetrixBoard::TetrixBoard(QWidget *parent)

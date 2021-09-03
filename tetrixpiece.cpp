@@ -121,7 +121,7 @@ int TetrixPiece::maxY() const
 //! [6]
 
 //! [7]
-TetrixPiece TetrixPiece::rotatedLeft()
+const TetrixPiece TetrixPiece::rotatedLeft()
 {
     if (pieceShape == SquareShape)
         return *this;
@@ -137,7 +137,7 @@ TetrixPiece TetrixPiece::rotatedLeft()
 }
 
 //! [9]
-TetrixPiece TetrixPiece::rotatedRight()
+const TetrixPiece TetrixPiece::rotatedRight()
 {
     if (pieceShape == SquareShape)
         return *this;

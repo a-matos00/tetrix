@@ -74,6 +74,9 @@ public:
     GPIO_pin* R_pin;
     GPIO_pin* ROT_pin;
 
+    int curX;
+    int curY;
+
     TetrixPiece curPiece;
 
     void setNextPieceLabel(QLabel *label);
@@ -126,8 +129,6 @@ private:
     bool isPaused;
     bool isWaitingAfterLine;
     TetrixPiece nextPiece;
-    int curX;
-    int curY;
     int numLinesRemoved;
     int numPiecesDropped;
     int score;

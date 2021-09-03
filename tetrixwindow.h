@@ -68,6 +68,7 @@ class TetrixWindow : public QWidget
 
 public:
     TetrixWindow(QWidget *parent = nullptr);
+    void rotatePiece();
 
 private:
     QLabel *createLabel(const QString &text);
@@ -85,6 +86,7 @@ private:
     QPushButton *leftButton;
     QPushButton *rightButton;
     QPushButton *dropButton;
+    QPushButton *rotateButton;
 
 };
 //! [0]

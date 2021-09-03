@@ -74,8 +74,8 @@ public:
     int maxY() const;
 
 public slots:
-    TetrixPiece rotatedLeft();
-    TetrixPiece rotatedRight();
+    const TetrixPiece rotatedLeft();
+    const TetrixPiece rotatedRight();
 
 private:
     void setX(int index, int x) { coords[index][0] = x; }
