@@ -421,8 +421,8 @@ bool TetrixBoard::tryMove(const TetrixPiece &newPiece, int newX, int newY)
 void TetrixBoard::drawSquare(QPainter &painter, int x, int y, TetrixShape shape)
 {
     static constexpr QRgb colorTable[8] = {
-        0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
-        0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00
+        0x000000, 0xFF00F7, 0x3AFF00, 0x0000FF,
+        0xFFFF00, 0x00FFF7, 0xFF0000, 0xFF9E00
     };
 
     QColor color = colorTable[int(shape)];

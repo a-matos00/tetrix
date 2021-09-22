@@ -57,6 +57,7 @@
 #include <QLabel>
 #include <QLCDNumber>
 #include <QPushButton>
+#include <QImage>
 
 //! [0]
 TetrixWindow::TetrixWindow(QWidget *parent)
@@ -87,20 +88,21 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     // pauseButton->setFocusPolicy(Qt::NoFocus);
 
     //NEW
-    leftButton = new QPushButton(tr("LEFT"));
+    leftButton = new QPushButton(tr("<--"));
     leftButton->setFocusPolicy(Qt::NoFocus);
-    rightButton = new QPushButton(tr("RIGHT"));
+    rightButton = new QPushButton(tr("-->"));
     rightButton->setFocusPolicy(Qt::NoFocus);
     dropButton = new QPushButton(tr("DROP"));
     dropButton->setFocusPolicy(Qt::NoFocus);
 
-    rightButton->setStyleSheet("QPushButton{font-size: 65px;font-family: Arial; background-color:#6EF0FF; height:140px}");
-    leftButton->setStyleSheet("QPushButton{font-size: 65px;font-family: Arial; background-color:#6EF0FF; height:140px}");
+    rightButton->setStyleSheet("QPushButton{font-size: 65px;font-family: Arial; background-color:#BC0000; height:140px;}");
+    leftButton->setStyleSheet("QPushButton{font-size: 65px;font-family: Arial; background-color:#BC0000; height:140px}");
     startButton->setStyleSheet("QPushButton{font-size: 40px;font-family: Arial; background-color:#70FF4A;  height:80px}");
-    quitButton->setStyleSheet("QPushButton{font-size: 40px;font-family: Arial; background-color:#FF4A4A; height:80px}");
+    quitButton->setStyleSheet("QPushButton{font-size: 40px;font-family: Arial; background-color:#BC0000; height:80px}");
     //pauseButton->setStyleSheet("QPushButton{font-size: 30px;font-family: Arial; background-color:#6EF0FF}");
-    dropButton->setStyleSheet("QPushButton{font-size: 60px;font-family: Arial; background-color:#F4FF51; height:120px}");
-    rotateButton->setStyleSheet("QPushButton{font-size: 60px;font-family: Arial; background-color:#fec15b; height:120px}");
+    dropButton->setStyleSheet("QPushButton{font-size: 60px;font-family: Arial; background-color:grey; height:120px}");
+    rotateButton->setStyleSheet("QPushButton{font-size: 60px;font-family: Arial; background-color:grey; height:120px;}");
+    scoreLcd->setStyleSheet("QLCDNumber{color:white}");
 
     connect(startButton, &QPushButton::clicked, board, &TetrixBoard::start);
     connect(leftButton, &QPushButton::clicked, board, &TetrixBoard::leftPress);
@@ -126,14 +128,22 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     connect(board, &TetrixBoard::linesRemovedChanged,
             linesLcd, QOverload<int>::of(&QLCDNumber::display));
 #endif
-//! [5]
-//! [6]
+
+    QImage* logoImg;
+    logoImg = new QImage("/home/andrija/Documents/GitHub/tetrix/logo.png");
+    QLabel* imgDisplayLabel;
+    imgDisplayLabel = new QLabel("");
+    imgDisplayLabel->setPixmap(QPixmap::fromImage(*logoImg));
+    imgDisplayLabel->adjustSize();
+    imgDisplayLabel->setScaledContents( true );
+    imgDisplayLabel->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+
     QGridLayout *layout = new QGridLayout;
-    layout->addWidget(createLabel(tr("NEXT")), 1, 0);
-    layout->addWidget(nextPieceLabel, 2, 0,3,1);
+    //layout->addWidget(createLabel(tr("NEXT")), 1, 0);
+    //layout->addWidget(nextPieceLabel, 2, 0,3,1);
     //layout->addWidget(createLabel(tr("LEVEL")), 2, 0);
     //layout->addWidget(levelLcd, 3, 0);
-    layout->addWidget(startButton, 5, 0);
+    layout->addWidget(startButton,5, 0);
     layout->addWidget(board, 0, 1, 6, 1);
     //layout->addWidget(createLabel(tr("SCORE")), 4, 2);
     layout->addWidget(scoreLcd, 2, 2,3,1);
@@ -145,12 +155,14 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     layout->addWidget(rightButton, 0, 2);
     layout->addWidget(dropButton, 1, 2);
     layout->addWidget(rotateButton,1,0);
+    layout->addWidget(imgDisplayLabel, 2, 0,3,1);
+
     setLayout(layout);
 
     setWindowTitle(tr("Tetrix"));
     resize(800, 480);
     //background color
-    this->setStyleSheet("TetrixWindow{background-color:#eaeaea}");
+    this->setStyleSheet("TetrixWindow{background-color:black}");
 }
 //! [6]
 
