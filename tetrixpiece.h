@@ -51,7 +51,7 @@
 #ifndef TETRIXPIECE_H
 #define TETRIXPIECE_H
 
-#include "gpio_pin.h"
+#include <QObject>
 
 enum TetrixShape { NoShape, ZShape, SShape, LineShape, TShape, SquareShape,
                    LShape, MirroredLShape };

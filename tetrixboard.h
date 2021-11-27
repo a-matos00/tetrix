@@ -56,7 +56,6 @@
 #include <QPointer>
 
 #include "tetrixpiece.h"
-#include "gpio_pin.h"
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -69,10 +68,6 @@ class TetrixBoard : public QFrame
 
 public:
     TetrixBoard(QWidget *parent = nullptr);
-
-    GPIO_pin* L_pin;
-    GPIO_pin* R_pin;
-    GPIO_pin* ROT_pin;
 
     int curX;
     int curY;

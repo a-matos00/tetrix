@@ -64,13 +64,6 @@ TetrixBoard::TetrixBoard(QWidget *parent)
     setFocusPolicy(Qt::StrongFocus);
     clearBoard();
 
-    L_pin = new GPIO_pin (17, "in", 0, "rising");
-    R_pin = new GPIO_pin (27, "in", 0, "rising");
-    ROT_pin = new GPIO_pin (23, "in", 0, "rising");
-    connect(L_pin,SIGNAL(signalPinValChange(int, int)), this, SLOT(leftPress()));
-    connect(R_pin,SIGNAL(signalPinValChange(int, int)), this, SLOT(rightPress()));
-    connect(ROT_pin,SIGNAL(signalPinValChange(int, int)), this, SLOT(rotate()));
-
     nextPiece.setRandomShape();
 }
 //! [0]

@@ -57,7 +57,6 @@
 #include <QLabel>
 #include <QLCDNumber>
 #include <QPushButton>
-#include <QImage>
 
 //! [0]
 TetrixWindow::TetrixWindow(QWidget *parent)
@@ -84,8 +83,6 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     quitButton->setFocusPolicy(Qt::NoFocus);
     rotateButton = new QPushButton(tr("ROTATE"));
     rotateButton->setFocusPolicy(Qt::NoFocus);
-    //pauseButton = new QPushButton(tr("Pause"));
-    // pauseButton->setFocusPolicy(Qt::NoFocus);
 
     //NEW
     leftButton = new QPushButton(tr("<--"));
@@ -99,7 +96,6 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     leftButton->setStyleSheet("QPushButton{font-size: 65px;font-family: Arial; background-color:#BC0000; height:140px}");
     startButton->setStyleSheet("QPushButton{font-size: 40px;font-family: Arial; background-color:#70FF4A;  height:80px}");
     quitButton->setStyleSheet("QPushButton{font-size: 40px;font-family: Arial; background-color:#BC0000; height:80px}");
-    //pauseButton->setStyleSheet("QPushButton{font-size: 30px;font-family: Arial; background-color:#6EF0FF}");
     dropButton->setStyleSheet("QPushButton{font-size: 60px;font-family: Arial; background-color:grey; height:120px}");
     rotateButton->setStyleSheet("QPushButton{font-size: 60px;font-family: Arial; background-color:grey; height:120px;}");
     scoreLcd->setStyleSheet("QLCDNumber{color:white}");
@@ -109,10 +105,8 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     connect(rightButton, &QPushButton::clicked, board, &TetrixBoard::rightPress);
     connect(dropButton, &QPushButton::clicked, board, &TetrixBoard::dropDown);
     connect(rotateButton, &QPushButton::clicked, this, &TetrixWindow::rotatePiece);
-    ;
-//! [4] //! [5]
     connect(quitButton , &QPushButton::clicked, qApp, &QCoreApplication::quit);
-    //connect(pauseButton, &QPushButton::clicked, board, &TetrixBoard::pause);
+
 #if __cplusplus >= 201402L
     connect(board, &TetrixBoard::scoreChanged,
             scoreLcd, qOverload<int>(&QLCDNumber::display));
@@ -129,6 +123,7 @@ TetrixWindow::TetrixWindow(QWidget *parent)
             linesLcd, QOverload<int>::of(&QLCDNumber::display));
 #endif
 
+    //FESB Racing logo
     QImage* logoImg;
     logoImg = new QImage("/home/andrija/Documents/GitHub/tetrix/logo.png");
     QLabel* imgDisplayLabel;
@@ -139,18 +134,10 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     imgDisplayLabel->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
 
     QGridLayout *layout = new QGridLayout;
-    //layout->addWidget(createLabel(tr("NEXT")), 1, 0);
-    //layout->addWidget(nextPieceLabel, 2, 0,3,1);
-    //layout->addWidget(createLabel(tr("LEVEL")), 2, 0);
-    //layout->addWidget(levelLcd, 3, 0);
     layout->addWidget(startButton,5, 0);
     layout->addWidget(board, 0, 1, 6, 1);
-    //layout->addWidget(createLabel(tr("SCORE")), 4, 2);
     layout->addWidget(scoreLcd, 2, 2,3,1);
-    //layout->addWidget(createLabel(tr("LINES REMOVED")), 2, 2);
-    //layout->addWidget(linesLcd, 3, 2);
     layout->addWidget(quitButton, 5, 2);
-    //layout->addWidget(pauseButton, 5, 2);
     layout->addWidget(leftButton, 0, 0);
     layout->addWidget(rightButton, 0, 2);
     layout->addWidget(dropButton, 1, 2);
@@ -164,9 +151,7 @@ TetrixWindow::TetrixWindow(QWidget *parent)
     //background color
     this->setStyleSheet("TetrixWindow{background-color:black}");
 }
-//! [6]
 
-//! [7]
 QLabel *TetrixWindow::createLabel(const QString &text)
 {
     QLabel *label = new QLabel(text);
